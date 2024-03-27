@@ -14,4 +14,6 @@ JAVASCRIPT
 
 
 **Folder Structure**
+
+
 ![image](https://github.com/ANITAPATIL2814/Student-Management-System/assets/142707200/b664cd63-5d20-4bca-8de8-9bf9244267db)

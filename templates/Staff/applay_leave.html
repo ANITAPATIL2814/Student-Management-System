@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-header">
+    <div class="row align-items-center">
+       <div class="col">
+
+          <h3 class="page-title">Staff Leave</h3>
+          <ul class="breadcrumb">
+             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+             <li class="breadcrumb-item active">Staff Leave</li>
+          </ul>
+       </div>
+       <div class="col-auto text-right float-right ml-auto">
+          <button  class="btn btn-primary mr-2" data-toggle="modal" data-target=".bd-example-modal-lg" type="button"><i class="fas fa-pray"></i> Leave Applay History</button>
+       </div>
+    </div>
+ </div>
+<div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+        <form method="POST" action="{% url 'staff_applay_leave_save' %}" >
+            {% csrf_token %}
+            <div class="col-sm-11">
+                <h5 class="form-title"><span>Applay For Leave</span></h5>
+            </div>
+                {% include 'includes/messages.html' %}
+                <div class="col-sm-11">
+                    <div class="form-group">
+                    <label>Leave Date</label>
+                    <input type="date" class="form-control" name="leave_date" required/> 
+                    </div>
+                </div>
+                <div class="col-sm-11">
+                    <div class="form-group">
+                    <label>Leave Reason</label>
+                    <textarea class="form-control" name="leave_message" style="height: 200px;" required></textarea>
+                </div>
+                </div> 
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Applay For Leave</button>
+            </div><br>
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+<!--bootstrap Large modal -->
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="model-title" id="exampleModalLabel">Applay Leave History</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+        <div class="modal-body">
+                <div class="col-sm-12">
+                   <div class="card card-table">
+                      <div class="card-body">
+                         <div class="table-responsive">
+                            <table id="table_id" class="table table-hover table-center mb-0 ">
+                               <thead>
+                                  <tr>
+                                     <th>Date</th>
+                                     <th>Message</th>
+                                     <th class="text-right">Status</th>
+                                  </tr>
+                               </thead>
+                               <tbody>
+                                 <!--use for loop to create multiple tr -->
+                                 {% for i in Staff_leave_history %}
+                                  <tr>       
+                                     <td>{{i.data}}</td>                     
+                                     <td>{{i.message}}</td>   
+                                     
+                                     <td class="text-right">
+                                        <div class="actions">
+                                           {% if i.status == 0 %}
+                                           <span class="badge badge-info">Request are Pending</span>
+                                           {% elif i.status == 1 %}
+                                           <span class="badge badge-success">Accepted</span>
+                                           {% else %}
+                                           <span class="badge badge-danger">Rejected</span>
+                                           {% endif %}
+                                        </div>
+                                     </td>
+                                  </tr>
+                                  {% endfor %}
+                               </tbody>
+                            </table>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

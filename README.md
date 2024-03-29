@@ -12,6 +12,8 @@ CSS
 
 JAVASCRIPT
 
+MYSQL
+
 
 **Folder Structure**
 

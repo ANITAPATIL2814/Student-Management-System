@@ -1,6 +1,6 @@
 **Introduction**
 
-Welcome to the Student Management System Project! This project aims to provide Student information, Staff information as well as Hod information
+Welcome to the Student Management System Project! This project aims to provide Student information, Staff information as well as Hod information.This project provides a login page with various authentication features.
 
 ## Technologies Used
 - Django
